@@ -1,43 +1,118 @@
-# Data Science SQL Project - JOINS AND GROUP BY
+# Data Science SQL Project 3 - GROUP BY ve Aggregate Fonksiyonlar
 
-### Proje Kurulumu
-Projeyi öncelikle forklayın ve clone edin.
-Proje sayımız ilerledikçe proje yönetimimizi kolaylaştırmak adına projelerimizi belli klasör kalıplarında saklamak işimizi kolaylaştırmak adına iyi bir alışkanlıktır.
-Örnek bir Lokasyon: Code2Work/DataScience/data-projects.
+## Proje Kurulumu
 
-### Proje Kurulumu Komutlar
-Aşağıdaki komutları sıtrayla çalıştırınız.
-* python -m venv venv
-* venv\Scripts\activate
-* pip install -r requirements.txt => Install all dependencies
-* python watch.py => Python run all tests
+1. Projeyi **fork** edin ve kendi hesabınıza **clone** edin.
+2. Terminal'de proje klasörüne girin.
 
-## Bonus
-* Eğer daha detaylı bir şekilde testlerin içerisine bakmak isterseniz
-* pytest .\tests\test_question.py -s -v 
+### Mac / Linux
+```bash
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
 
-### Projeye Başlamadan Önce
-* Belirtilen sql querylerini yazabilmek için scripts klasörü altındaki bulunan init_db.py dosyası içerisindeki tüm queryleri 
-sırasıyla kendi local veritabanınızda çalıştırınız. 
-* Veritabanınızın hazır olduğundan emin olmak için tüm tablolara birer SELECT sorgusu atıp sonuçların doğru olduğundan emin olunuz.
-* Çalışırken sadece data klasörü altında bulunan questions.py dosyasında çalışacağız. Bunun klasör dışındaki kodları değiştirmeyiniz !
-* connect_db fonksiyonu içerisinde veritabanına bağlanma bilgileri var. Projenizi kendi localinizde test ederken burada bilgileri kendi local veritabanı bilgilerinizle değiştirerek test ediniz. Ancak kodunuzu <b>pushlarken bu veritabanı bilgilerini ilk bulduğunuz şekilde bırakınız.</b> Çünkü kodlarınız Cloud bir ortamda bu bilgilerle bir veritabanına bağlancaklardır.
+### Windows
+```bash
+python -m venv venv
+venv\Scripts\activate
+pip install -r requirements.txt
+```
 
-### Hedeflerimiz:
+## Veritabanı Kurulumu
 
-### Görev 1
+1. PostgreSQL'in bilgisayarınızda kurulu ve çalışır durumda olduğundan emin olun.
+2. `scripts/init_db.py` dosyasındaki SQL komutlarını sırasıyla kendi local veritabanınızda çalıştırın.
+3. Tabloların doğru oluştuğundan emin olmak için her tabloya birer `SELECT *` sorgusu atın.
 
-* question_1_query fonksiyonun içerisinde `DATE_TRUNC ile ay bazlı kayıt sayılarını listele` işlemini gerçekleştirecek sql querysini yazınız.
-* question_2_query fonksiyonun içerisinde `DATE_PART ile sadece kayıtların yıl bilgisini al` işlemini gerçekleştirecek sql querysini yazınız. query tüm kolonları dönmelidir.
-* question_3_query fonksiyonun içerisinde `Tüm öğrencilerin yaşlarının toplamını dönen bir sql sorgusu yaz.` işlemini gerçekleştirecek sql querysini yazınız.
-* question_4_query fonksiyonun içerisinde `Tüm kurs sayısını bul` işlemini gerçekleştirecek sql querysini yazınız.
-query sadece course_id bilgisini dönmelidir.
-* question_5_query fonksiyonun içerisinde `Öğrencilerin ortalama yaşını bulan sorguyu yazınız.` işlemini gerçekleştirecek sql querysini yazınız.
-query tüm kolonları dönmelidir.
-* question_6_query fonksiyonun içerisinde `Her kursun en eski kayıt tarihini bul.` işlemini gerçekleştirecek sql querysini yazınız.
-query course_id ve en eski tarihi first_enrollment ismiyle dönmelidir.
-* question_7_query fonksiyonun içerisinde `Her kurs için öğrencilerin ortalama yaşlarını bulun.` işlemini gerçekleştirecek sql querysini yazınız.
-query course_name ve ortalama yaş(avg_age) değerlerini dönmelidir.
-* question_8_query fonksiyonun içerisinde `En genç öğrencinin yaşını getiren sorguyu yazınız.` işlemini gerçekleştirecek sql querysini yazınız.
-* question_9_query fonksiyonun içerisinde `Her derse kayıt olmuş öğrenci sayısını bulunuz.` işlemini gerçekleştirecek sql querysini yazınız. Sorgu sadece course_name ve yanında o dersi kaç kişinin aldığının bilgisini stoudent_count ismiyle dönmelidir.
-* question_10_query fonksiyonun içerisinde `Tüm kayıt olunmuş derslerin sadece isimlerini getirinz.` işlemini gerçekleştirecek sql querysini yazınız.
+> **Not:** `data/question.py` içindeki `connect_db()` fonksiyonunda veritabanı bağlantı bilgileri var.
+> Localinizde test ederken kendi bilgilerinizle değiştirin.
+> **Pushlarken bu bilgileri varsayılan haliyle bırakın.**
+
+## Başlangıç Ayarları
+
+1. **`tests/test_question.py`** — Dosyanın altındaki `run_tests()` fonksiyonunda `user_id` değerini **kendi kullanıcı ID'nizle** değiştirin.
+2. **`data/question.py`** — `connect_db()` fonksiyonundaki veritabanı şifresini kendi local PostgreSQL şifrenizle değiştirin. **Pushlarken varsayılan haliyle bırakın.**
+
+## Çalışma Şekli
+
+- Sadece `data/question.py` dosyasında çalışın.
+- Her fonksiyon içindeki boş `cursor.execute('')` satırına SQL sorgunuzu yazın.
+- Diğer dosyaları değiştirmeyin.
+
+## Testleri Çalıştırma
+
+```bash
+python watch.py
+```
+
+Tek seferlik:
+```bash
+pytest tests/test_question.py -s -v
+```
+
+## Tablolar
+
+### students
+| Sütun | Tip |
+|-------|-----|
+| student_id | SERIAL (PK) |
+| first_name | VARCHAR(50) |
+| last_name | VARCHAR(50) |
+| age | INT |
+| city | VARCHAR(50) |
+
+### courses
+| Sütun | Tip |
+|-------|-----|
+| course_id | SERIAL (PK) |
+| course_name | VARCHAR(100) |
+| category | VARCHAR(50) |
+
+### enrollments
+| Sütun | Tip |
+|-------|-----|
+| enrollment_id | SERIAL (PK) |
+| student_id | INT (FK -> students) |
+| course_id | INT (FK -> courses) |
+| enrollment_date | DATE |
+
+## Sorular
+
+### Bölüm 1: Tarih Fonksiyonları
+
+1. `DATE_TRUNC` ile ay bazlı kayıt sayılarını listele. (`month`, `count` — aya göre sıralı)
+
+2. `DATE_PART` ile kayıtların sadece **yıl bilgisini** al. (Tek sütun: `year`)
+
+### Bölüm 2: Aggregate Fonksiyonlar
+
+3. Tüm öğrencilerin yaşlarının **toplamını** döndür. (Tek değer: `SUM`)
+
+4. Toplam **kurs sayısını** bul. (`SELECT COUNT(course_id) ...` — tek satır döner)
+
+5. Yaşı **ortalama yaştan büyük** olan öğrencileri getir. (Tüm sütunlar, `student_id`'ye göre sıralı)
+
+6. Her kursun **en eski kayıt tarihini** bul. (`course_id`, `first_enrollment` — `course_id`'ye göre sıralı)
+
+### Bölüm 3: GROUP BY + JOIN
+
+7. Her kurs için öğrencilerin **ortalama yaşlarını** bul. (`course_name`, `avg_age` — `course_id`'ye göre sıralı)
+
+8. **En genç** öğrencinin yaşını getir. (Tek değer: `MIN`)
+
+9. Her derse kayıt olmuş **öğrenci sayısını** bul. (`course_name`, `student_count` — `course_id`'ye göre sıralı)
+
+10. Kayıt olunmuş derslerin sadece **isimlerini** getir. (Tek sütun: `course_name` — `course_name`'e göre sıralı, tekrarsız)
+
+---
+
+## İpucu: Ayrı Schema Kullanmak
+
+Localinizdeki PostgreSQL'de başka tablolarla karışmasın istiyorsanız:
+
+```sql
+CREATE SCHEMA data3;
+```
+
+Tablo ve sorguların başına schema adını ekleyin (`data3.students`, `data3.courses` vb.). Foreign key tanımlarında da schema adını unutmayın. **Pushlarken schema öneki olmadan bırakın.**

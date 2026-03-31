@@ -10,7 +10,7 @@ conn = psycopg2.connect(
 cur = conn.cursor()
 
 cur.execute("""
-CREATE TABLE students (
+CREATE TABLE IF NOT EXISTS students (
     student_id SERIAL PRIMARY KEY,
     first_name VARCHAR(50),
     last_name VARCHAR(50),
@@ -20,7 +20,7 @@ CREATE TABLE students (
 """)
 
 cur.execute("""
-CREATE TABLE courses (
+CREATE TABLE IF NOT EXISTS courses (
     course_id SERIAL PRIMARY KEY,
     course_name VARCHAR(100),
     category VARCHAR(50)
@@ -28,7 +28,7 @@ CREATE TABLE courses (
 """)
 
 cur.execute("""
-CREATE TABLE enrollments (
+CREATE TABLE IF NOT EXISTS enrollments (
     enrollment_id SERIAL PRIMARY KEY,
     student_id INT REFERENCES students(student_id),
     course_id INT REFERENCES courses(course_id),
