@@ -1,3 +1,32 @@
+# SQL Data Analysis Project - Aggregation & Grouping
+
+This project focuses on advanced data summarizing techniques and is based on a SQL training project provided by Code2Work.
+
+## 📌 What I Did
+
+* Solved complex SQL query tasks focusing on data aggregation (`GROUP BY`, `HAVING`) and aggregate functions (`SUM`, `AVG`, `COUNT`, `MIN`, `MAX`).
+* Implemented queries using Python to interact with the PostgreSQL database.
+* Passed all test cases successfully.
+
+## 🛠️ Technologies
+
+* Python
+* PostgreSQL
+* SQL
+* pytest
+
+## ✅ Results
+
+* All tests passed successfully
+
+## 📎 Reference
+
+Original project: https://github.com/Code2Work/data-science-project-3
+
+---
+
+
+
 # Data Science SQL Project 3 - GROUP BY ve Aggregate Fonksiyonlar
 
 ## Proje Kurulumu
